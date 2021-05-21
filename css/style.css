@@ -172,6 +172,7 @@ body {
 
 .header {
   background-color: #0D0D2B;
+  min-height: 100vh;
 }
 
 .header__content {
