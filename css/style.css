@@ -86,9 +86,11 @@ h6 {
 
 html {
   max-width: 1920px;
+  min-width: 320px;
   overflow-x: hidden;
   min-height: 100vh;
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -96,6 +98,10 @@ body {
   font-size: 1.6rem;
   color: #FFFFFF;
   font-family: 'Rubik', sans-serif;
+}
+
+body._lock {
+  overflow: hidden;
 }
 
 .page-wrapper {
@@ -115,8 +121,9 @@ body {
 }
 
 .container {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0;
 }
 
 .primary-btn {
@@ -172,7 +179,6 @@ body {
 
 .header {
   background-color: #0D0D2B;
-  min-height: 100vh;
 }
 
 .header__content {
@@ -260,12 +266,30 @@ body {
   animation-timing-function: ease;
 }
 
-.nav-links {
-  -ms-flex-item-align: center;
-  align-self: center;
+.menu__body._active {
+  z-index: 100;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.nav-links > ul {
+.menu__body._active .menu__list {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.menu__body {
+  -ms-flex-item-align: center;
+  align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.menu__body .menu__list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -274,33 +298,13 @@ body {
   justify-content: space-between;
 }
 
-.nav-links__item {
+.menu__body > li {
   margin-left: 3.2rem;
   position: relative;
   z-index: 10;
 }
 
-.nav-links__item::after {
-  content: "";
-  width: calc(100% + 2rem);
-  height: calc(100% + 2rem);
-  position: absolute;
-  border-radius: 3.2rem;
-  top: -1rem;
-  left: -1rem;
-  z-index: -1;
-  background-color: #F24822;
-  opacity: 0;
-  -webkit-transition: opacity .2s ease;
-  -o-transition: opacity .2s ease;
-  transition: opacity .2s ease;
-}
-
-.nav-links__item:hover::after {
-  opacity: 1;
-}
-
-.nav-links__link {
+.menu__body__link {
   line-height: 2.8rem;
 }
 
@@ -356,7 +360,6 @@ body {
 
 .auth-header__reg-btn {
   margin-left: 4.8rem;
-  line-height: 2.4rem;
   line-height: 5.2rem;
   padding: 0 3.2rem;
   font-weight: 500;
@@ -422,6 +425,26 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.menu__icon {
+  display: none;
+}
+
+.menu__body {
+  overflow: hidden;
+}
+
+.menu__list li {
+  position: relative;
+  margin: 0 0 0 20px;
+}
+
+.menu__link {
+  color: white;
+  font-size: 18px;
+  position: relative;
+  z-index: 10;
+}
+
 .intro {
   background-color: #0D0D2B;
 }
@@ -457,7 +480,7 @@ body {
 }
 
 .intro__image-box {
-  width: 65rem;
+  width: 100%;
 }
 
 .intro__bckg-image {
@@ -557,7 +580,7 @@ body {
 
 .trade__bright-container {
   color: #0D0D2B;
-  padding: 31.6rem 0 10rem 0;
+  padding: 33rem 0 10rem 0;
   background: -webkit-gradient(linear, left top, left bottom, from(#F8F9FB), to(#FAFBFF));
   background: -o-linear-gradient(top, #F8F9FB 0%, #FAFBFF 100%);
   background: linear-gradient(180deg, #F8F9FB 0%, #FAFBFF 100%);
@@ -572,11 +595,12 @@ body {
 
 .calculator-trade {
   position: absolute;
-  bottom: -21.6rem;
+  bottom: -60%;
   left: calc(50% - 94.2rem / 2);
   background-color: #FFFFFF;
   border-radius: 1.6rem;
   text-align: start;
+  font-size: 1.6rem;
   -webkit-box-shadow: 0 2rem 20rem #2f1362;
   box-shadow: 0 2rem 20rem #2f1362;
 }
@@ -589,7 +613,7 @@ body {
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: #FBFCFE;
-  padding: 5.5rem 4.8rem;
+  padding: 5.5em 4.8em;
   border-top-left-radius: 1.6rem;
   border-top-right-radius: 1.6rem;
 }
@@ -693,9 +717,9 @@ body {
   border-radius: 1.6rem;
   background-color: #FFF;
   padding: 17.6rem 2.4rem 4.8rem 2.4rem;
-  -webkit-transition: background-color .7s ease;
-  -o-transition: background-color .7s ease;
-  transition: background-color .7s ease;
+  -webkit-transition: background-color .5s ease;
+  -o-transition: background-color .5s ease;
+  transition: background-color .5s ease;
 }
 
 .item-currencies:hover {
@@ -704,13 +728,21 @@ body {
   box-shadow: 1rem 1rem 3rem #391777;
 }
 
+.item-currencies:hover .start-btn {
+  background-color: #3671E9;
+}
+
+.item-currencies:hover .start-btn:hover {
+  background-color: #F24822;
+}
+
 .item-currencies:hover .item-currencies__name,
 .item-currencies:hover .item-currencies__text {
   color: white;
 }
 
 .item-currencies:hover .start-btn__text {
-  display: block;
+  font-size: 1.8rem;
 }
 
 .item-currencies:hover .start-btn__icon {
@@ -782,22 +814,28 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-transition: width, height 3s linear;
-  -o-transition: width, height 3s linear;
-  transition: width, height 3s linear;
+  background-color: rgba(54, 113, 233, 0.6);
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
 }
 
 .start-btn__text {
-  font-size: 1.8rem;
+  font-size: 0;
   line-height: 2.7rem;
   color: #FFFFFF;
   padding: 1.85rem 2.4rem;
-  display: none;
+  -webkit-transition: font-size .5s ease 0s;
+  -o-transition: font-size .5s ease 0s;
+  transition: font-size .5s ease 0s;
 }
 
 .start-btn__icon {
   width: 6.4rem;
   height: 6.4rem;
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
   border-radius: 50%;
   border: 2px solid rgba(43, 7, 110, 0.2);
   display: -webkit-box;
@@ -885,6 +923,7 @@ body {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  padding: 0 1rem;
 }
 
 .box-content__info {
@@ -914,10 +953,7 @@ body {
 
 .box-content__image {
   display: block;
-  height: auto;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 calc(100% - (38% + 10rem));
-  flex: 0 0 calc(100% - (38% + 10rem));
+  width: 90%;
 }
 
 .start {
@@ -940,6 +976,8 @@ body {
   justify-content: space-between;
   background-color: #3671E9;
   border-radius: 1.6rem;
+  margin: 0 auto;
+  max-width: 97%;
 }
 
 .start__left {
@@ -964,6 +1002,7 @@ body {
   color: #FFFFFF;
   min-width: 37rem;
   line-height: 2.8rem;
+  margin-left: 2rem;
 }
 
 .start__input::-webkit-input-placeholder {
@@ -1135,11 +1174,18 @@ body {
 .visa-payment::after {
   content: "";
   position: absolute;
-  background: url("../img/footer/logos_visa.svg");
+  background: url("../img/footer/logos_visa.svg") no-repeat;
   width: 4.8rem;
   height: 1.6rem;
-  top: calc(50% - 1.6rem / 2);
-  left: calc(50% - 4.8rem / 2);
+  background-size: cover;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all .2s ease 0s;
+  -o-transition: all .2s ease 0s;
+  transition: all .2s ease 0s;
 }
 
 .mastercard-payment {
@@ -1149,11 +1195,18 @@ body {
 .mastercard-payment::after {
   content: "";
   position: absolute;
-  background: url("../img/footer/logos_mastercard.svg");
+  background: url("../img/footer/logos_mastercard.svg") no-repeat;
+  background-size: cover;
   width: 4.8rem;
   height: 3.8rem;
-  top: calc(50% - 3.8rem / 2);
-  left: calc(50% - 4.8rem / 2);
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all .2s ease 0s;
+  -o-transition: all .2s ease 0s;
+  transition: all .2s ease 0s;
 }
 
 .btc-payment {
@@ -1163,11 +1216,18 @@ body {
 .btc-payment::after {
   content: "";
   position: absolute;
-  background: url("../img/footer/logos_bitcoin.svg");
+  background: url("../img/footer/logos_bitcoin.svg") no-repeat;
+  background-size: cover;
   width: 4rem;
   height: 4rem;
-  top: calc(50% - 4rem / 2);
-  left: calc(50% - 4rem / 2);
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all .2s ease 0s;
+  -o-transition: all .2s ease 0s;
+  transition: all .2s ease 0s;
 }
 
 .bottom-footer {
@@ -1232,6 +1292,601 @@ body {
 .facebook {
   width: 1rem;
   height: 2rem;
+}
+
+@media (min-width: 767px) {
+  .menu__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .menu__link::after {
+    content: "";
+    width: calc(100% + 2rem);
+    height: calc(100% + 2rem);
+    position: absolute;
+    border-radius: 3.2rem;
+    top: -1rem;
+    left: -1rem;
+    z-index: -1;
+    background-color: #F24822;
+    opacity: 0;
+    -webkit-transition: opacity .2s ease;
+    -o-transition: opacity .2s ease;
+    transition: opacity .2s ease;
+  }
+
+  .menu__link:hover::after {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 991.98px) {
+  .visa-payment:hover::after {
+    width: 6rem;
+    height: 2rem;
+  }
+
+  .mastercard-payment:hover::after {
+    width: 6rem;
+    height: 4.6rem;
+  }
+
+  .btc-payment:hover::after {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media screen and (max-width: 1199.98px) {
+  .container {
+    max-width: 960px;
+  }
+
+  .calculator-trade {
+    width: 90%;
+    left: calc(50% - 90% / 2);
+    bottom: -40%;
+  }
+
+  .calculator-trade__top {
+    padding: 3rem;
+  }
+
+  .calculator-trade__input {
+    min-width: 25rem;
+  }
+
+  .features__title {
+    padding: 0 3rem;
+  }
+
+  .box-content__image {
+    padding: 0 3rem;
+  }
+
+  .start__input {
+    min-width: 25rem;
+  }
+
+  .logo-footer {
+    margin-right: 10rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header__left {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .header__right {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .title {
+    font-size: 3.2rem;
+    line-height: 4rem;
+  }
+
+  .header__proposition {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 5rem;
+    margin-top: 3rem;
+  }
+
+  .header__left {
+    padding-top: 4rem;
+  }
+
+  .menu__body > li {
+    margin-left: 2rem;
+  }
+
+  .auth-header__reg-btn {
+    line-height: 3.8rem;
+    padding: 0 2.6rem;
+  }
+
+  .intro__content {
+    padding: 4rem 0;
+  }
+
+  .intro__numbers {
+    margin-bottom: 0;
+  }
+
+  .intro__left {
+    display: none;
+  }
+
+  .intro__right {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .trade__dark-container {
+    padding-top: 5rem;
+  }
+
+  .trade__title-text {
+    width: 85%;
+  }
+
+  .calculator-trade {
+    width: 90%;
+    left: calc(50% - 90% / 2);
+    bottom: -50%;
+  }
+
+  .calculator-trade__input {
+    font-size: 1.6rem;
+    min-width: 14rem;
+    margin-right: 2rem;
+  }
+
+  .calculator-trade__select {
+    font-size: 1.6rem;
+    min-width: 9rem;
+  }
+
+  .start__left {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+  }
+
+  .start__right {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 55%;
+    flex: 0 0 55%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .start__input {
+    min-width: 20rem;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 4rem;
+  }
+
+  .start__subscribe-btn {
+    margin-left: 0;
+    font-size: 1.6rem;
+  }
+
+  .logo-footer {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .auth-header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin: 6rem 0 0 0;
+  }
+
+  .auth-header__login {
+    font-size: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .auth-header__login:hover {
+    text-decoration: underline;
+  }
+
+  .auth-header__login::before,
+  .auth-header__login::after {
+    display: none;
+  }
+
+  .auth-header__reg-btn {
+    margin: 0;
+    font-size: 2.4rem;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .auth-header__reg-btn:hover {
+    text-decoration: underline;
+    background: none;
+  }
+
+  .menu__list li {
+    padding: 10px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .menu__icon {
+    display: block;
+    z-index: 101;
+    position: relative;
+    width: 30px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .menu__icon span,
+  .menu__icon::before,
+  .menu__icon::after {
+    left: 0;
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    -webkit-transition: all .3s ease 0s;
+    -o-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+    background-color: #fff;
+  }
+
+  .menu__icon::before,
+  .menu__icon::after {
+    content: "";
+  }
+
+  .menu__icon::before {
+    top: 0;
+  }
+
+  .menu__icon::after {
+    bottom: 0;
+  }
+
+  .menu__icon span {
+    top: 50%;
+    -webkit-transform: scale(1) translate(0px, -50%);
+    -ms-transform: scale(1) translate(0px, -50%);
+    transform: scale(1) translate(0px, -50%);
+  }
+
+  .menu__body {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 13, 43, 0.97);
+    padding: 100px 30px 30px 30px;
+    -webkit-transition: left .3s ease 0s;
+    -o-transition: left .3s ease 0s;
+    transition: left .3s ease 0s;
+    overflow: auto;
+  }
+
+  .menu__body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 0;
+    height: 70px;
+    background-color: transparent;
+    z-index: 2;
+  }
+
+  .menu__body._active {
+    left: 0;
+  }
+
+  .menu__list li._active .menu__sub-list {
+    display: block;
+  }
+
+  .menu__list li {
+    margin: 0 0 30px 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .menu__list li:last-child {
+    margin: 0;
+  }
+
+  .menu__link {
+    font-size: 24px;
+  }
+
+  .menu__icon._active span {
+    -webkit-transform: scale(0) translate(0px, -50%);
+    -ms-transform: scale(0) translate(0px, -50%);
+    transform: scale(0) translate(0px, -50%);
+  }
+
+  .menu__icon._active::before {
+    top: 50%;
+    -webkit-transform: rotate(-45deg) translate(0px, -50%);
+    -ms-transform: rotate(-45deg) translate(0px, -50%);
+    transform: rotate(-45deg) translate(0px, -50%);
+  }
+
+  .menu__icon._active::after {
+    bottom: 50%;
+    -webkit-transform: rotate(45deg) translate(0px, 50%);
+    -ms-transform: rotate(45deg) translate(0px, 50%);
+    transform: rotate(45deg) translate(0px, 50%);
+  }
+}
+
+@media screen and (max-width: 766.98px) {
+  .container {
+    max-width: 540px;
+  }
+
+  .header__top {
+    margin-top: 4rem;
+  }
+
+  .left-header__btn {
+    font-size: 1.8rem;
+  }
+
+  .intro__numbers {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .intro__intro {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .item-box {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    margin-bottom: 2rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trade__bright-container {
+    padding-top: 90vh;
+  }
+
+  .calculator-trade {
+    bottom: -90%;
+  }
+
+  .calculator-trade__top {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .calculator-trade__input {
+    width: 100%;
+  }
+
+  .calculator-trade__select {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  .calculator-trade__calculate-btn {
+    margin: 2rem 0;
+  }
+
+  .currencies-trade {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .currencies-trade__item {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 90%;
+    flex: 0 0 90%;
+    margin-bottom: 2rem;
+    border: 1px solid #828282;
+  }
+
+  .features {
+    padding-bottom: 5rem;
+  }
+
+  .features__box {
+    margin-bottom: 4rem;
+  }
+
+  .box-content__info {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .box-content__image {
+    display: none;
+  }
+
+  .start__box {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .start__left {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .start__left {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    margin-bottom: 4rem;
+  }
+
+  .start__right {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 35%;
+    flex: 0 0 35%;
+  }
+
+  .start__right {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .footer__content {
+    padding: 4rem 0;
+  }
+
+  .footer__top {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .top-footer__column {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+  }
+
+  .navigation-footer {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+  }
+
+  .resources-footer {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+  }
+
+  .payment-footer {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  .payment-footer__text {
+    -ms-flex-item-align: center;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .container {
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .left-header__title {
+    font-size: 4rem;
+    line-height: 5rem;
+  }
+
+  .blckfriday-promo__text {
+    font-style: 1rem;
+    line-height: 2rem;
+  }
+
+  .trade__bright-container {
+    padding-top: 90vh;
+  }
+
+  .calculator-trade {
+    min-height: 90vh;
+    bottom: -80vh;
+  }
+
+  .calculator-trade__result {
+    font-size: 2rem;
+    line-height: 3.6rem;
+  }
+
+  .features__title {
+    font-size: 2.4rem;
+    padding: 0;
+  }
+
+  .start__input {
+    width: 100%;
+    font-size: 1.6rem;
+  }
+
+  .bottom-footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .bottom-footer__rights {
+    margin-bottom: 4rem;
+  }
 }
 
 .webp .header__logo::before { background: url(../img/header/header__logo.webp) 0 0 no-repeat; }
